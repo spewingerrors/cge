@@ -1,3 +1,5 @@
+# Executable name
+EXEC = cge
 
 # Compiler binary and compiler flags
 CXX = g++
@@ -7,16 +9,10 @@ CXXFLAGS = -Wall
 SRCS = main.cpp card.cpp deck.cpp
 OBJS = $(SRCS:.cpp=.o)
 
-# Executable name
-EXEC = software
-
+# Default rule is the first one
 # Rule to link object files into the exectuable
 $(EXEC): $(OBJS)
-	$(CXX) -o $@ $(OBJS) 
-
-# Default Rule: build the executable
-#all:
-#	$(SRCS) $(EXEC)
+	$(CXX) -o $@ $(OBJS)
 
 # Rule to compile objects from src
 %.o: %.cpp
