@@ -13,7 +13,7 @@ struct Deck {
     Deck(int suits, int jokers, int cards_per_suit);
     Deck(std::string name);
     void Print();
-    int Shuffle();
+    void Shuffle();
 };
 
 #endif

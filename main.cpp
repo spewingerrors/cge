@@ -12,17 +12,11 @@ void helper(int input) {
 
 int main(int argc, char **argv) {
 	Deck pile(4, 0, 13);
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
-	helper(pile.Shuffle());
+	//helper(pile.Shuffle());
+	//helper(pile.Shuffle());
+	//helper(pile.Shuffle());
+	//helper(pile.Shuffle());
+	//helper(pile.Shuffle());
+	pile.Shuffle();
 	return 0;
 }
