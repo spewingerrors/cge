@@ -3,6 +3,7 @@
 #include <vector>
 #include "deck.hpp"
 
+// Constructor for a deck of cards
 Deck::Deck(int suits, int jokers, int cards_per_suit) {
     std::cout << "You created a new deck with " << suits << " suits and " << jokers << " jokers!" << "\n";
     this->suits = suits;
@@ -15,14 +16,16 @@ Deck::Deck(int suits, int jokers, int cards_per_suit) {
             this->deck.emplace_back(newcard);
         }
     }
-    std::cout << "We exited the loop!" << "\n";
 }
 
+// This may be better suited for some config file that defines any specific game.
+// e.g. maybe it's an ini file where the [DECK] header would have these options.
 Deck::Deck(std::string name) {
     // This will refer to some typical decks of cards.
     // 'standard', 'pinochle', 'euchre' come to mind.
 }
 
+// for debug purposes
 void Deck::Print() {
     // This loop generates a warning for comparing an int to 
     // a length of vector. Casts and checks may need to happen.
@@ -43,59 +46,59 @@ int randomNumber(int low, int high) {
 }
 
 void Deck::Shuffle() {
-   // begin implementing shuffling routines.
-   // multiple can be implemented - overhand, riffle, wash 
-   // 0 == 22 for standard deck of cards
-   // 8 == 30 for standard deck of cards
-   int cutpos = randomNumber(0, 8) + ((this->deck.size()/2) - this->suits);
+    // begin implementing shuffling routines.
+    // multiple can be implemented - overhand, riffle, wash 
 
-   std::vector<Card> temp1;
-   std::vector<Card> temp2;
-   // split the deck into 2 halves at the 'cutpos'.
-   for (int i = 0; i < cutpos; i++) {
+    // RIFFLE SHUFFLE:
+    // 0 == 22 for standard deck of cards
+    // 8 == 30 for standard deck of cards
+    int cutpos = randomNumber(0, 8) + ((this->deck.size()/2) - this->suits);
+
+    std::vector<Card> temp1;
+    std::vector<Card> temp2;
+    // split the deck into 2 halves at the 'cutpos'.
+    for (int i = 0; i < cutpos; i++) {
         auto pos1 = temp1.begin();
         temp1.insert(pos1, this->deck.back());
         this->deck.pop_back();
-   }
-   // We copy the remainder of the deck to temp2
-   // and clear this->deck.
-   temp2 = this->deck;
-   this->deck.clear();
-
-   std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << "\n";
-   // printing the vector that is temp1
-   std::cout << "TEMP 1: ";
-   for (std::vector<Card>::size_type i = 0; i < temp1.size(); i++) {
-        std::cout << temp1.at(i).card_name << ", ";
-   }
-   std::cout << "\n\nTEMP 2: ";
-   // also printing temp2
-   for (std::vector<Card>::size_type i = 0; i < temp2.size(); i++) {
-        std::cout << temp2.at(i).card_name << ", ";
-   }
-   std::cout << "\n";
-
-   std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << "\n";
-   std::cout << "this->deck size: " << this->deck.size();
-
-  /* bool merging = 1;
-   while (merging) {
+    }
+    // We copy the remainder of the deck to temp2
+    // and clear this->deck.
+    temp2 = this->deck;
+    this->deck.clear();
+    //std::cout << "TEMP 1: ";
+    //for (std::vector<Card>::size_type i = 0; i < temp1.size(); i++) {
+    //     std::cout << temp1.at(i).card_name << ", ";
+    //}
+    //
+    int merging = 1;
+    std::cout << "Entering merge loop.\n";
+    while (merging == 1) {
         int randNum = randomNumber(0, 1);
-        if (randNum || temp1.size() > 0) {
+        std::cout << "I got a random number: " << randNum << ";";
+        if (randNum == 1 && temp1.size() > 0) {
             auto pos = this->deck.begin();
             this->deck.insert(pos, temp1.back());
             temp1.pop_back();
+            std::cout << "Added from temp1 to deck." << "\n";
         }
         else if (temp2.size() > 0) {
             auto pos = this->deck.begin();
             this->deck.insert(pos, temp2.back());
             temp2.pop_back();
+            std::cout << "Added from temp2 to deck." << "\n";
         }
         else if (temp1.size() == 0 && temp2.size() == 0) {
             merging = 0;
+            std::cout << "Deck empty.\n";
         }
-   }
-*/
-   std::cout << "\n" << cutpos << std::endl;
-   this->Print();
+    }
+    this->Print();
 }
+
+//void Deck::Clean() {
+//    while (this->deck.size() > 0) {
+//        std::cout << "Deleting card!" << "\n";
+//        delete this->deck.back();
+//    }
+//}

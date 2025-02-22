@@ -14,6 +14,7 @@ struct Deck {
     Deck(std::string name);
     void Print();
     void Shuffle();
+    void Clean();
 };
 
 #endif
