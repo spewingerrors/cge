@@ -31,11 +31,21 @@ void Deck::Print() {
     }
 }
 
+int randomNumber(int low, int high) {
+    if (low > high) {
+        return -1;
+    }
+    std::random_device rd;
+    std::default_random_engine gen(rd());
+    std::uniform_int_distribution<int> range(low, high);
+    return range(gen);
+}
+
 int Deck::Shuffle() {
    // begin implementing shuffling routines.
    // multiple can be implemented - overhand, riffle, wash 
-   std::default_random_engine generator;
-   std::uniform_int_distribution<int> distribution(0, 9);
-   int cutpos = distribution(generator) + ((deck.size()/2) - 5);
+   // 0 == 22 for standard deck of cards
+   // 8 == 30 for standard deck of cards
+   int cutpos = randomNumber(0, 8) + ((this->deck.size()/2) - this->suits);
    return cutpos;
 }

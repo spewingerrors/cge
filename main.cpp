@@ -6,9 +6,23 @@
 #include "card.hpp"
 #include "deck.hpp"
 
-int main(int argc, char **argv)
-{
+void helper(int input) {
+	std::cout << input << "\n";
+}
+
+int main(int argc, char **argv) {
 	Deck pile(4, 0, 13);
-	std::cout << "\n\n" << pile.Shuffle() << "\n" << pile.Shuffle() << "\n" << pile.Shuffle() << "\n";
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
+	helper(pile.Shuffle());
 	return 0;
 }

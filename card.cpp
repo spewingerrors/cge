@@ -9,5 +9,5 @@ Card::Card(int suit, int value) {
 	this->card_suit = suits[suit];
 	this->card_value = cardvals[value];
 	this->card_name = this->card_value + " of " + this->card_suit;
-	std::cout << "Created card " << this->card_name << "\n";
+	//std::cout << "Created card " << this->card_name << "\n";
 }

@@ -2,6 +2,7 @@
 #define DECK_H
 #include "card.hpp"
 #include <vector>
+#include <string>
 
 struct Deck {
     int suits;
