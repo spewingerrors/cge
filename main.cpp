@@ -9,6 +9,6 @@
 int main(int argc, char **argv)
 {
 	Deck pile(4, 0, 13);
-	std::cout << "The number of suits in this deck is " << pile.suits << "\n";
+	std::cout << "\n\n" << pile.Shuffle() << "\n" << pile.Shuffle() << "\n" << pile.Shuffle() << "\n";
 	return 0;
 }

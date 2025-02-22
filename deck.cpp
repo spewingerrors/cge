@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 #include "deck.hpp"
 
 Deck::Deck(int suits, int jokers, int cards_per_suit) {
@@ -30,7 +31,11 @@ void Deck::Print() {
     }
 }
 
-void Deck::Shuffle() {
+int Deck::Shuffle() {
    // begin implementing shuffling routines.
    // multiple can be implemented - overhand, riffle, wash 
+   std::default_random_engine generator;
+   std::uniform_int_distribution<int> distribution(0, 9);
+   int cutpos = distribution(generator) + ((deck.size()/2) - 5);
+   return cutpos;
 }
