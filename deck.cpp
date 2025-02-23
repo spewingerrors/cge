@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <random>
 #include <vector>
 #include "deck.hpp"
@@ -10,10 +11,12 @@ Deck::Deck(int suits, int jokers, int cards_per_suit) {
     this->jokers = jokers;
 
     // Using a loop to assign the cards to a vector based on function input.
-    for (int i = 0; i < suits; i++) {
-        for (int j = 0; j < cards_per_suit; j++) {
-            Card newcard(i, j);
-            this->deck.emplace_back(newcard);
+    for (int j = 0; j < suits; j++) {
+        for (int i = 0; i < cards_per_suit; i++) {
+            //Card newcard(i, j);
+            //this->deck.emplace_back(newcard);
+            //std::shared_ptr<Card>(new Card(i, j));// = std::make_shared<Card>();
+            this->deck.emplace_back(std::shared_ptr<Card>(new Card(i, j)));
         }
     }
 }
@@ -31,7 +34,7 @@ void Deck::Print() {
     // a length of vector. Casts and checks may need to happen.
     // It works for now!!!!!!!!!
     for (std::vector<Card>::size_type i = 0; i < this->deck.size(); i++) {
-        std::cout << this->deck.at(i).card_name << "\n";
+        std::cout << this->deck.at(i).get()->card_name << "\n";
     }
 }
 
@@ -54,8 +57,8 @@ void Deck::Shuffle() {
     // 8 == 30 for standard deck of cards
     int cutpos = randomNumber(0, 8) + ((this->deck.size()/2) - this->suits);
 
-    std::vector<Card> temp1;
-    std::vector<Card> temp2;
+    std::vector<std::shared_ptr<Card>> temp1;
+    std::vector<std::shared_ptr<Card>> temp2;
     // split the deck into 2 halves at the 'cutpos'.
     for (int i = 0; i < cutpos; i++) {
         auto pos1 = temp1.begin();
@@ -92,6 +95,12 @@ void Deck::Shuffle() {
             merging = 0;
             std::cout << "Deck empty.\n";
         }
+        else if (randNum == 1 && temp1.size() == 0) {
+            std::cout << "Wanted to pull from temp1 but it's empty.\n";
+        }
+        else if (randNum == 0 && temp2.size() == 0) {
+            std::cout << "Wanted to pull from temp2 but it's empty.\n";
+        }
     }
     this->Print();
 }
@@ -102,3 +111,7 @@ void Deck::Shuffle() {
 //        delete this->deck.back();
 //    }
 //}
+
+std::shared_ptr<Card> DealFromTop() {
+
+}
