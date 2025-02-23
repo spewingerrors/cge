@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -19,3 +22,5 @@ struct Player {
     void AddCardToHand(std::shared_ptr<Card> card);
     void PrintHand();
 };
+
+#endif
