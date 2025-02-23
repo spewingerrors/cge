@@ -16,8 +16,7 @@ int main(int argc, char **argv) {
 	int total_players = 4;
 	// for now, we're hard-coding 4.
 	std::vector<Player> players;
-	std::string player1 = "Player 1";
-	Player newplayer1(player1);
+	Player newplayer1("Player 1");
 	players.emplace_back(newplayer1);
 	Player newplayer2("Player 2");
 	players.emplace_back(newplayer2);
@@ -37,8 +36,18 @@ int main(int argc, char **argv) {
 	pile.Shuffle();
 	pile.Shuffle();
 
+	std::cout << "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+	std::cout << "Dealing cards.\n";
+	int total_cards = 3;
 
-
+	for (int i = 0; i < total_cards; i++) {
+		for (long unsigned int j = 0; j < players.size(); j++) {
+			players.at(j).AddCardToHand(pile.DealFromTop());
+			players.at(j).PrintHand();
+		}
+		std::cout << "---------------------------------------------\n";
+	}
+	std::cout << std::endl;
 
 	return 0;
 }

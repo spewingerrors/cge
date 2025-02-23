@@ -112,6 +112,9 @@ void Deck::Shuffle() {
 //    }
 //}
 
-std::shared_ptr<Card> DealFromTop() {
-
+std::shared_ptr<Card> Deck::DealFromTop() {
+    // erase and return the top card.
+    auto retval = this->deck.at(0);
+    this->deck.erase(this->deck.begin());
+    return retval;
 }
