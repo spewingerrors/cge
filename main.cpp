@@ -6,14 +6,18 @@
 #include "card.hpp"
 #include "deck.hpp"
 #include "player.hpp"
+#include "logger.hpp"
 
 void helper(int input) {
 	std::cout << input << "\n";
 }
 
 int main(int argc, char **argv) {
+	// initialize logger
+	Logger logger("debug.log");
 	// Initialize all the players
 	int total_players = 4;
+	logger.WriteToLogger("Total number of players is " + total_players);
 	// for now, we're hard-coding 4.
 	std::vector<Player> players;
 	Player newplayer1("Player 1");

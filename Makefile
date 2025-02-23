@@ -6,7 +6,7 @@ CXX = g++
 CXXFLAGS = -Wall
 
 # Source and object files
-SRCS = main.cpp card.cpp deck.cpp player.cpp
+SRCS = main.cpp card.cpp deck.cpp player.cpp logger.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Default rule is the first one
