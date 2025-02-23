@@ -11,6 +11,6 @@ std::string suits[] = {"Clubs", "Hearts", "Spades", "Diamonds"};
 Card::Card(int value, int suit) {
 	this->card_value = cardvals[value];
 	this->card_suit = suits[suit];
-	this->card_name = this->card_value + " of " + this->card_suit + "(suit)";
-	//std::cout << "Created card " << this->card_name << "\n";
+	this->id = (suit * 13) + (value + 1);
+	this->card_name = this->card_value + " of " + this->card_suit + "(" + std::to_string(this->id) + ")";
 }

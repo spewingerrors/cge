@@ -13,9 +13,6 @@ Deck::Deck(int suits, int jokers, int cards_per_suit) {
     // Using a loop to assign the cards to a vector based on function input.
     for (int j = 0; j < suits; j++) {
         for (int i = 0; i < cards_per_suit; i++) {
-            //Card newcard(i, j);
-            //this->deck.emplace_back(newcard);
-            //std::shared_ptr<Card>(new Card(i, j));// = std::make_shared<Card>();
             this->deck.emplace_back(std::shared_ptr<Card>(new Card(i, j)));
         }
     }
@@ -78,6 +75,10 @@ void Deck::Shuffle() {
     std::cout << "Entering merge loop.\n";
     while (merging == 1) {
         int randNum = randomNumber(0, 1);
+        // FUNCTIONAL ALERT!
+        // For whatever reason, the RNG sometimes spits out 
+        // long strings of '1' or '0'. Maybe go back and program
+        // some consistency.
         std::cout << "I got a random number: " << randNum << ";";
         if (randNum == 1 && temp1.size() > 0) {
             auto pos = this->deck.begin();
@@ -85,7 +86,7 @@ void Deck::Shuffle() {
             temp1.pop_back();
             std::cout << "Added from temp1 to deck." << "\n";
         }
-        else if (temp2.size() > 0) {
+        else if (randNum == 0 && temp2.size() > 0) {
             auto pos = this->deck.begin();
             this->deck.insert(pos, temp2.back());
             temp2.pop_back();
