@@ -4,13 +4,20 @@
 #include <ctime>
 #include "logger.hpp"
 
-Logger::Logger(std::string filename) {
+Logger::Logger() {
+    this->filename = "debug.log";
+}
+
+void Logger::File(std::string newFilename) {
+    if (this->filename != newFilename) {
+        this->Write("Switching logger from " + this->filename + " to " + newFilename + ".");
+        this->filename = newFilename;
+    }
     std::ofstream logfile;
-    logfile.open(filename, std::ios::app);
+    logfile.open(this->filename, std::ios::app);
     if (logfile.is_open()) {
         logfile << Time();
         logfile << "Successfully created logger.\n";
-        this->filename = filename;
         logfile.close();
     }
     else {
@@ -28,11 +35,11 @@ std::string Logger::Time() {
     hour = std::to_string(curtime->tm_hour);
     minute = std::to_string(curtime->tm_min);
     second = std::to_string(curtime->tm_sec);
-    retval = month + "/" + day + "/" + year + "," + hour + ":" + minute + ":" + second + "->";
+    retval = month + "/" + day + "/" + year + "@" + hour + ":" + minute + ":" + second + "->";
     return retval;
 }
 
-void Logger::WriteToLogger(std::string toLogger) {
+void Logger::Write(std::string toLogger) {
     std::ofstream logfile;
     logfile.open(this->filename, std::ios::app);
     if (logfile.is_open()) {

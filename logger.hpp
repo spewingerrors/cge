@@ -5,11 +5,12 @@
 
 struct Logger {
     std::string filename;
-    Logger(std::string filename);
-    Logger() : Logger("log.log") {
-        this->filename = "log.log";
-    };
-    void WriteToLogger(std::string toLogger);
+    Logger();
+    void File(std::string filename);
+    //Logger() : Logger("debug.log") {
+    //    this->filename = "debug.log";
+    //};
+    void Write(std::string toLogger);
     std::string Time();
 };
 
