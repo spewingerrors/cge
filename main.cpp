@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 	Logger logger("debug.log");
 	// Initialize all the players
 	int total_players = 4;
-	logger.WriteToLogger("Total number of players is " + total_players);
+	logger.WriteToLogger("Total number of players is " + std::to_string(total_players) + ".");
 	// for now, we're hard-coding 4.
 	std::vector<Player> players;
 	Player newplayer1("Player 1");

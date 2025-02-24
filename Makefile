@@ -6,7 +6,7 @@ CXX = g++
 CXXFLAGS = -Wall
 
 # Source and object files
-SRCS = main.cpp card.cpp deck.cpp player.cpp logger.cpp
+SRCS = main.cpp logger.cpp card.cpp deck.cpp player.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 # Default rule is the first one
@@ -20,6 +20,6 @@ $(EXEC): $(OBJS)
 
 # Clean rule removes object files and executable
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -f $(OBJS) $(EXEC) *.log
 
 # g++ -o software main.cpp card.cpp

@@ -3,6 +3,7 @@
 #include <random>
 #include <vector>
 #include "deck.hpp"
+#include "logger.hpp"
 
 // Constructor for a deck of cards
 Deck::Deck(int suits, int jokers, int cards_per_suit) {
@@ -16,6 +17,7 @@ Deck::Deck(int suits, int jokers, int cards_per_suit) {
             this->deck.emplace_back(std::shared_ptr<Card>(new Card(i, j)));
         }
     }
+    this->logger.filename = "deck.log";
 }
 
 // This may be better suited for some config file that defines any specific game.
@@ -33,6 +35,8 @@ void Deck::Print() {
     for (std::vector<Card>::size_type i = 0; i < this->deck.size(); i++) {
         std::cout << this->deck.at(i).get()->card_name << "\n";
     }
+    this->logger.WriteToLogger("Printed the deck successfully!");
+    //Logger::
 }
 
 int randomNumber(int low, int high) {
@@ -103,6 +107,7 @@ void Deck::Shuffle() {
             std::cout << "Wanted to pull from temp2 but it's empty.\n";
         }
     }
+    this->logger.WriteToLogger("Alright, we shuffled!");
     this->Print();
 }
 

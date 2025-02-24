@@ -1,6 +1,7 @@
 #ifndef DECK_H
 #define DECK_H
 #include "card.hpp"
+#include "logger.hpp"
 #include <vector>
 #include <memory>
 #include <string>
@@ -9,6 +10,7 @@ struct Deck {
     int suits;
     int jokers;
     int cards_per_suit;
+    Logger logger;
     std::vector<std::shared_ptr<Card>> deck;
 
     Deck(int suits, int jokers, int cards_per_suit);
