@@ -20,6 +20,11 @@ $(EXEC): $(OBJS)
 
 # Clean rule removes object files and executable
 clean:
-	rm -f $(OBJS) $(EXEC) *.log
+	rm -rf $(OBJS) $(EXEC) *.log
 
+cleanlogs:
+	rm -rf *.log
+
+cleanobjs:
+	rm -rf $(OBJS) $(EXEC)
 # g++ -o software main.cpp card.cpp
