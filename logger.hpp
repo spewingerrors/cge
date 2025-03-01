@@ -9,8 +9,7 @@ struct Logger {
     std::filesystem::path pathname;
 
     Logger();
-    Logger(std::filesystem::path relativePath);
-    void File(std::string filename);
+    void Branch(std::string filename);
     void Write(std::string toLogger);
     std::string Time();
 };
