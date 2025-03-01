@@ -2,16 +2,52 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <filesystem>
 #include "logger.hpp"
 
 Logger::Logger() {
-    this->filename = "debug.log";
+    std::filesystem::path defaultpath = "./logs/";
+    if (std::filesystem::exists(defaultpath)) {
+        std::cout << "###############################\n";
+        std::cout << "### TOTALLY EXISTS.\n";
+        std::cout << "###############################\n";
+    }
+    else {
+        std::filesystem::create_directory(defaultpath);
+        std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+        std::cout << "!!! We made it.\n";
+        std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+    }
+    this->filename = "pilot.log";
+    this->pathname = defaultpath;
 }
 
-void Logger::File(std::string newFilename) {
-    if (this->filename != newFilename) {
-        this->Write("Switching logger from " + this->filename + " to " + newFilename + ".");
-        this->filename = newFilename;
+Logger::Logger(std::filesystem::path relativePath) {
+    std::filesystem::path defaultpath = "";
+    std::string filename;
+    if (!(std::filesystem::exists(relativePath))) {
+        // if the relative path doesn't exist, try to make it.
+        if (!(std::filesystem::create_directory(relativePath))) {
+            std::cerr << "Unable to resolve this path. ";
+            std::cerr << "Defaulting logging to \"./logs/error.log\". ";
+            std::cerr << "Check your path for errors." << std::endl;
+            defaultpath = "";
+            this->filename = "error.log";
+            this->pathname = defaultpath;
+        }
+    } else {
+        // if the realtive path DOES exist...
+        this->pathname = relativePath;
+    }
+    this->filename = "pilot.log";
+    this->pathname = defaultpath;
+}
+
+void Logger::File(std::string filename) {
+    filename = this->pathname.string() + filename;
+    if (this->filename != filename) {
+        this->Write("Switching logger from " + this->filename + " to " + filename + ".");
+        this->filename = filename;
     }
     std::ofstream logfile;
     logfile.open(this->filename, std::ios::app);
@@ -40,7 +76,7 @@ std::string Logger::Time() {
 }
 
 void Logger::Write(std::string toLogger) {
-    std::ofstream logfile;
+    std::ofstream logfile("logs/" + filename);
     logfile.open(this->filename, std::ios::app);
     if (logfile.is_open()) {
         char end = toLogger.back();

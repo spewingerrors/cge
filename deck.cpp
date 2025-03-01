@@ -50,13 +50,13 @@ int randomNumber(int low, int high) {
 }
 
 void Deck::Shuffle() {
-    // begin implementing shuffling routines.
-    // multiple can be implemented - overhand, riffle, wash 
-
     // RIFFLE SHUFFLE:
     // 0 == 22 for standard deck of cards
     // 8 == 30 for standard deck of cards
-    int cutpos = randomNumber(0, 8) + ((this->deck.size()/2) - this->suits);
+    int cutpos;
+    if (cutpos = randomNumber(0, 8) + ((this->deck.size()/2) - this->suits); (cutpos < 0)) {
+        this->logger.Write("Unable to shuffle deck; error in RNG.");
+    }
 
     std::vector<std::shared_ptr<Card>> temp1;
     std::vector<std::shared_ptr<Card>> temp2;
@@ -70,31 +70,28 @@ void Deck::Shuffle() {
     // and clear this->deck.
     temp2 = this->deck;
     this->deck.clear();
-    //std::cout << "TEMP 1: ";
-    //for (std::vector<Card>::size_type i = 0; i < temp1.size(); i++) {
-    //     std::cout << temp1.at(i).card_name << ", ";
-    //}
+
     //
-    int merging = 1;
+    bool merging = 1;
     std::cout << "Entering merge loop.\n";
-    while (merging == 1) {
+    while (merging) {
         int randNum = randomNumber(0, 1);
         // FUNCTIONAL ALERT!
         // For whatever reason, the RNG sometimes spits out 
         // long strings of '1' or '0'. Maybe go back and program
         // some consistency.
-        std::cout << "I got a random number: " << randNum << ";";
+        std::cout << randNum << "; ";
         if (randNum == 1 && temp1.size() > 0) {
             auto pos = this->deck.begin();
             this->deck.insert(pos, temp1.back());
             temp1.pop_back();
-            std::cout << "Added from temp1 to deck." << "\n";
+            std::cout << "Added " << this->deck.at(0)->card_name << " to the deck.\n";
         }
         else if (randNum == 0 && temp2.size() > 0) {
             auto pos = this->deck.begin();
             this->deck.insert(pos, temp2.back());
             temp2.pop_back();
-            std::cout << "Added from temp2 to deck." << "\n";
+            std::cout << "Added " << this->deck.at(0)->card_name << "temp2 to deck." << "\n";
         }
         else if (temp1.size() == 0 && temp2.size() == 0) {
             merging = 0;

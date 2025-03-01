@@ -6,6 +6,12 @@
 #include <memory>
 #include <string>
 
+enum ShuffleType {
+    RIFFLE,
+    OVERHAND,
+    WASH
+};
+
 struct Deck {
     int suits;
     int jokers;
