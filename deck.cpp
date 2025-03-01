@@ -17,7 +17,7 @@ Deck::Deck(int suits, int jokers, int cards_per_suit) {
             this->deck.emplace_back(std::shared_ptr<Card>(new Card(i, j)));
         }
     }
-    this->logger.File("deck.log");
+    this->logger.Branch("deck.log");
 }
 
 // This may be better suited for some config file that defines any specific game.
