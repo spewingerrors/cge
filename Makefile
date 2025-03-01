@@ -20,10 +20,10 @@ $(EXEC): $(OBJS)
 
 # Clean rule removes object files and executable
 clean:
-	rm -rf $(OBJS) $(EXEC) *.log
+	rm -rf $(OBJS) $(EXEC) logs *.log
 
 cleanlogs:
-	rm -rf *.log
+	rm -rf logs *.log
 
 cleanobjs:
 	rm -rf $(OBJS) $(EXEC)
