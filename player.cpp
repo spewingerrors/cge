@@ -5,7 +5,6 @@
 Player::Player(std::string name) {
     this->name = name;
     this->score = 0;
-    //this->hand;
 }
 
 void Player::AddCardToHand(std::shared_ptr<Card> card) {
