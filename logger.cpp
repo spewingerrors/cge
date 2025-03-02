@@ -2,16 +2,13 @@
 #include <fstream>
 #include <string>
 #include <ctime>
-//#include <chrono>
 #include <filesystem>
 #include "logger.hpp"
 
 Logger::Logger() {
     this->filename = "pilot.log";
     std::filesystem::path defaultpath = "./logs/";
-    if (std::filesystem::exists(defaultpath)) {
-    }
-    else {
+    if (!(std::filesystem::exists(defaultpath))) {
         std::cout << "Unable to find path.\n";
         if (std::filesystem::create_directory(defaultpath)) {
             std::cout << "Successfully created path.\n";
@@ -63,6 +60,8 @@ void Logger::Write(std::string toLogger) {
     else {
         this->pathname = "";
         this->filename = "error.log";
+        // This should probably be tested to ensure it can't 
+        // go out of control.
         this->Write("Logger errored while trying to write \"" + toLogger + "\".");
     }
 }
