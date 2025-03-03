@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 
 
 	Deck pile(4, 0, 13);
-	pile.Print();
+	Print(pile.deck);
 	pile.Shuffle();
 	pile.Shuffle();
 	pile.Shuffle();
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 		players.at(j).PrintHand();
 	}
 	std::cout << "\n\n";
-	pile.Print();
+	Print(pile.deck);
 	std::cout << std::endl;
 
 	return 0;

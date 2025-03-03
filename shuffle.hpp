@@ -8,5 +8,6 @@
 // do this without explicitly being a part of the class.
 
 std::vector<std::shared_ptr<Card>> Riffle(std::vector<std::shared_ptr<Card>> input);
+std::vector<std::shared_ptr<Card>> Hindu(std::vector<std::shared_ptr<Card>> input);
 
 #endif

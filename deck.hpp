@@ -21,9 +21,10 @@ struct Deck {
 
     Deck(int suits, int jokers, int cards_per_suit);
     Deck(std::string name);
-    void Print();
     void Shuffle();
     std::shared_ptr<Card> DealFromTop();
 };
+
+void Print(std::vector<std::shared_ptr<Card>> input);
 
 #endif

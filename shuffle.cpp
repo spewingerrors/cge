@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 #include "shuffle.hpp"
+#include "deck.hpp"
 
 
 int randomNumber(int low, int high) {
@@ -68,5 +69,85 @@ std::vector<std::shared_ptr<Card>> Riffle(std::vector<std::shared_ptr<Card>> inp
         }
     }
 
+    return input;
+}
+
+std::vector<std::shared_ptr<Card>> Hindu(std::vector<std::shared_ptr<Card>> input) {
+    std::vector<std::shared_ptr<Card>> original = input;
+    std::vector<std::shared_ptr<Card>> tempStack;
+    input.clear();
+    std::cout << "Okay, we reached the inside of the function. About to 'while'.\n";
+    std::cout << "original:\n";
+    Print(original);
+    //Print(temp2);
+    std::cout << "input:\n";
+    Print(input);
+
+    
+    while (!original.empty()) {
+        tempStack.clear();
+        // take a chunk from the top
+        int rn = randomNumber(5, 15);
+        std::cout << "Reached RNG. Your number is " << rn << ".\n";
+        for (int i = 0; i < rn; i++ ) {
+            //std::cout << "Not yet! 00\n";
+            if (original.size() == 0) {
+                std::cout << "No more cards =(";
+                break;
+            }
+            // move chunk to a temp 'deck'
+            // temp2.push_back(temp1.at(0));
+            //std::cout << "Not yet! " + original.front()->card_name + "\n";
+            tempStack.insert(tempStack.begin(), original.front());
+            //std::cout << "Not yet! 1\n";
+            original.erase(original.begin());
+            //std::cout << "Not yet! 2\n";
+        }
+
+        std::cout << "Reached end of 1st inner loop.\n";
+        std::cout << "original:\n";
+        Print(original);
+        std::cout << "tempStack:\n";
+        Print(tempStack);
+        std::cout << "input:\n";
+        Print(input);
+
+        std::vector<std::shared_ptr<Card>> reverseTempStack;
+        //int tempsize = tempStack.size();
+        for (int i = 0; i < rn; i++) {
+            reverseTempStack.insert(reverseTempStack.begin(), tempStack.front());
+            tempStack.erase(tempStack.begin());
+        }
+        std::cout << "tempStack:\n";
+        Print(tempStack);
+        std::cout << "reverseTempStack:\n";
+        Print(reverseTempStack);
+        tempStack.clear();
+        tempStack = reverseTempStack;
+
+        for (int i = 0; i < rn; i++) {
+            if (tempStack.size() == 0) {
+                break;
+            }
+            input.insert(input.end(), tempStack.front());
+            tempStack.erase(tempStack.begin());
+            std::cout << "Reached end of 2nd inner loop.\n";
+            std::cout << "original:\n";
+            Print(original);
+            std::cout << "tempstack:\n";
+            Print(tempStack);
+            std::cout << "input:\n";
+            Print(input);
+        } 
+        
+        std::cout << "Reached end of outer loop.\n";
+        std::cout << "original:\n";
+        Print(original);
+        std::cout << "tempStack:\n";
+        Print(tempStack);
+        std::cout << "input:\n";
+        Print(input);
+    }
+    //input = temp1;
     return input;
 }

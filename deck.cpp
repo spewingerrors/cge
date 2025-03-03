@@ -28,22 +28,11 @@ Deck::Deck(std::string name) {
     // 'standard', 'pinochle', 'euchre' come to mind.
 }
 
-// for debug purposes
-void Deck::Print() {
-    // This loop generates a warning for comparing an int to 
-    // a length of vector. Casts and checks may need to happen.
-    // It works for now!!!!!!!!!
-    for (std::vector<Card>::size_type i = 0; i < this->deck.size(); i++) {
-        std::cout << this->deck.at(i).get()->card_name << "\n";
-    }
-    this->logger.Write("Printed the deck successfully!");
-    //Logger::
-}
-
 void Deck::Shuffle() {
-    this->deck = Riffle(this->deck);
+    //this->deck = Riffle(this->deck);
+    this->deck = Hindu(this->deck);
     this->logger.Write("Alright, we shuffled!");
-    this->Print();
+    Print(this->deck);
 }
 
 std::shared_ptr<Card> Deck::DealFromTop() {
@@ -51,4 +40,17 @@ std::shared_ptr<Card> Deck::DealFromTop() {
     auto retval = this->deck.at(0);
     this->deck.erase(this->deck.begin());
     return retval;
+}
+
+// for debug purposes
+void Print(std::vector<std::shared_ptr<Card>> input) {
+    // This loop generates a warning for comparing an int to 
+    // a length of vector. Casts and checks may need to happen.
+    // It works for now!!!!!!!!!
+    for (std::vector<Card>::size_type i = 0; i < input.size(); i++) {
+        std::cout << input.at(i)->card_name << "\n";
+    }
+    std::cout << "\n";
+    //this->logger.Write("Printed the deck successfully!");
+    //Logger::
 }
