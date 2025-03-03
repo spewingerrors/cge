@@ -72,87 +72,47 @@ std::vector<std::shared_ptr<Card>> Riffle(std::vector<std::shared_ptr<Card>> inp
     return input;
 }
 
-std::vector<std::shared_ptr<Card>> Hindu(std::vector<std::shared_ptr<Card>> input) {
+std::vector<std::shared_ptr<Card>> Overhand(std::vector<std::shared_ptr<Card>> input) {
     std::vector<std::shared_ptr<Card>> original = input;
     std::vector<std::shared_ptr<Card>> tempStack;
     input.clear();
-    std::cout << "Okay, we reached the inside of the function. About to 'while'.\n";
-    std::cout << "original:\n";
-    Print(original);
-    //Print(temp2);
-    std::cout << "input:\n";
-    Print(input);
-
     
     while (!original.empty()) {
         tempStack.clear();
         // take a chunk from the top
-        int rn = randomNumber(3, 7);
-        std::cout << "---------------------------------------------------------------------" << "\n";
-        std::cout << "Reached RNG. Your number is " << rn << ".\n";
-        for (int i = 0; i < rn; i++ ) {
-            //std::cout << "Not yet! 00\n";
+        long unsigned int rn = randomNumber(3, 7);
+        if (rn > original.size()) {
+            rn = original.size();
+        }
+        for (long unsigned int i = 0; i < rn; i++ ) {
             if (original.size() == 0) {
                 std::cout << "\nNo more cards =(\n";
                 break;
             }
-            // move chunk to a temp 'deck'
-            // temp2.push_back(temp1.at(0));
-            //std::cout << "Not yet! " + original.front()->card_name + "\n";
+            // Take 'front' of original and put it
+            // at the 'end' of tempStack.
             tempStack.insert(tempStack.end(), original.front());
-            //std::cout << "Not yet! 1\n";
+            // Erase the first original element you took.
             original.erase(original.begin());
-            //std::cout << "Not yet! 2\n";
         }
 
-        //std::cout << "Reached end of 1st inner loop.\n";
-        //std::cout << "original:\n";
-        //Print(original);
-        //std::cout << "tempStack:\n";
-        //Print(tempStack);
-        //std::cout << "input:\n";
-        //Print(input);
-
-        /*
-        std::vector<std::shared_ptr<Card>> reverseTempStack;
-        //int tempsize = tempStack.size();
-        for (int i = 0; i < rn; i++) {
-            reverseTempStack.insert(reverseTempStack.begin(), tempStack.front());
-            tempStack.erase(tempStack.begin());
-        }
-        std::cout << "tempStack:\n";
-        Print(tempStack);
-        std::cout << "reverseTempStack:\n";
-        Print(reverseTempStack);
-        tempStack.clear();
-        tempStack = reverseTempStack;
-*/
         int loopcount = input.size();
         for (int i = 0; i < loopcount; i++) {
             if (input.size() == 0) {
                 break;
             }
+            // Take the 'front' of input and put it
+            // at the 'end' of tempStack.
             tempStack.insert(tempStack.end(), input.front());
+            // Erase the first input element you took.
             input.erase(input.begin());
-            //std::cout << "Reached end of 2nd inner loop.\n";
-            //std::cout << "original:\n";
-            //Print(original);
-            //std::cout << "tempstack:\n";
-            //Print(tempStack);
-            //std::cout << "input:\n";
-            //Print(input);
         }
-
+        // We wrote all of input to tempStack.
+        // fix that.
         input = tempStack;
-        
-        std::cout << "Reached end of outer loop.\n";
-        std::cout << "original:\n";
-        Print(original);
-        std::cout << "tempStack:\n";
-        Print(tempStack);
-        std::cout << "input:\n";
-        Print(input);
     }
-    //input = temp1;
+    std::cout << "\n\nWe finished a shuffle!\n\n";
+    Print(input);
+    std::cout << "\n\n";
     return input;
 }

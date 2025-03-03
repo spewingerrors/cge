@@ -30,7 +30,7 @@ Deck::Deck(std::string name) {
 
 void Deck::Shuffle() {
     //this->deck = Riffle(this->deck);
-    this->deck = Hindu(this->deck);
+    this->deck = Overhand(this->deck);
     this->logger.Write("Alright, we shuffled!");
     Print(this->deck);
 }
